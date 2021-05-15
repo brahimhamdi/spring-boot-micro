@@ -1,0 +1,62 @@
+pipeline {
+  environment {
+//    registry = "brahimhamdi/app"
+    registryCredential = 'dockerhub'
+  }
+  
+  agent any
+  
+  stages {
+  
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/brahimhamdi/spring-boot-micro.git'
+      }
+    }
+  
+    stage('Build & Test app') {
+            steps {
+		sh 'mvn clean'
+		sh 'nohup mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8081 &'
+		sh 'sleep 60'
+		sh 'mvn package'
+        }
+    }
+    
+    
+    stage('Build Docker Image') {
+      steps{
+        script {
+		sh 'docker build -t app .'
+            }
+        }
+    }
+
+    stage('Test Image') {
+      steps{
+        sh 'docker rm app1 || echo no container app1'
+        sh 'docker run -d --name app1 -p 8082:8080 app'
+	sh 'docker rm app1'
+        }
+      }
+
+    stage('Image Delivery') {
+      steps{
+        script {
+	  sh 'docker tag app brahimhamdi/app1
+          docker.withRegistry( '', dockerhub ) {
+            dockerImage.push()
+                }
+            }
+        }
+    }
+
+    stage('Deploy to k8s') {
+      steps{
+            sh 'ansible-playbook -i hosts deploy-prod/ansible-config.yml'
+          }
+        }
+    }
+    
+    }
+}
