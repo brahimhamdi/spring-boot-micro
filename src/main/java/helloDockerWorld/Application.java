@@ -1,8 +1,3 @@
-/*
-Author: Shrikar Kalagi
-Date: 03/06/2019 
-*/ 
-
 package helloDockerWorld;
 
 import org.springframework.boot.SpringApplication;
