@@ -1,4 +1,2 @@
-[test]
-192.168.205.11 ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa ansible_ssh_user=vagrant
 [prod]
 192.168.205.10  ansible_ssh_user=vagrant  ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa

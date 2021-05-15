@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: app1
+        image: brahimhamdi/app1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: srv1
+spec:
+  selector:
+    app: myapp
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 31001
+      protocol: TCP
+  type: NodePort

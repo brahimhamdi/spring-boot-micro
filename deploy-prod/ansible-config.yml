@@ -1,0 +1,12 @@
+---
+- name: deployment
+  hosts: 192.168.205.10
+  gather_facts: "no"
+  become: yes
+  tasks:
+    - name: Désactiver swap
+      shell: swapoff -a
+    - name: Copy app.yml
+      copy: src=k8s-deploy.yml dest=/tmp
+    - name: deployer
+      shell: kubectl apply -f  /tmp/app.yml
