@@ -3,6 +3,7 @@
   hosts: 192.168.205.11
   gather_facts: "no"
   become: yes
+  become_user: vagrant
   tasks:
     - name: install Maven
       apt: name=maven state=present
