@@ -11,6 +11,6 @@
     - name: Copy pom.xml
       copy: src=../pom.xml dest=/home/vagrant
     - name: Tester
-      shell: mvn spring-boot:run 
+      command: mvn spring-boot:run 
     - name: Paquager
-      shell: mvn package 
+      command: mvn package 
