@@ -5,6 +5,7 @@
   tasks:
     - name: Désactiver swap
       shell: swapoff -a
+      become: yes
     - name: Copy app.yml
       copy: src=k8s-deploy.yml dest=/tmp
     - name: deployer
