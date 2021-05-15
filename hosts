@@ -1,0 +1,4 @@
+[test]
+192.168.205.11  ansible_ssh_user=vagrant
+[prod]
+192.168.205.10  ansible_ssh_user=vagrant
