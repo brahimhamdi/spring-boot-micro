@@ -11,6 +11,6 @@
     - name: Copy pom.xml
       copy: src=../pom.xml dest=/home/vagrant
     - name: Tester
-      shell: mvn spring-boot:run 
+      shell: mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=8081' 
     - name: Paquager
       shell: mvn package 
