@@ -9,4 +9,4 @@
     - name: Copy app.yml
       copy: src=k8s-deploy.yml dest=/tmp
     - name: deployer
-      shell: kubectl apply -f  /tmp/app.yml
+      shell: kubectl apply -f  /tmp/k8s-deploy.yml
