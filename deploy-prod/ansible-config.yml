@@ -6,6 +6,10 @@
     - name: Désactiver swap
       shell: swapoff -a
       become: yes
+    - name: Ajouter version
+      path: k8s-deploy.yml
+      regexp: '^image'
+      line: '        image: brahimhamdi/app1:' + {{ BUILD_NUMBER  }}
     - name: Copy app.yml
       copy: src=k8s-deploy.yml dest=/tmp
     - name: deployer
